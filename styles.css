@@ -16,7 +16,7 @@ html,
 body,
 [class*="css"] {
   font-family: "Manrope", sans-serif;
-  color: var(--ink);
+  color: var(--ink) !important;
 }
 .stApp {
   background:
@@ -28,10 +28,10 @@ body,
   padding-bottom: 4rem;
 }
 [data-testid="stSidebar"] {
-  background: #1d2b2e;
+  background: #eef7f1;
 }
 [data-testid="stSidebar"] * {
-  color: #edf7f0 !important;
+  color: var(--ink) !important;
 }
 [data-testid="stSidebar"] .stRadio label {
   padding: 0.38rem 0.1rem;
@@ -113,9 +113,23 @@ body,
 .quiz-question strong {
   color: #000000 !important;
 }
+div[data-testid="stForm"] div[data-testid="stRadio"] label,
+div[data-testid="stForm"] div[data-testid="stRadio"] label p,
+div[data-testid="stForm"] div[data-testid="stRadio"] label span {
+  color: #000000 !important;
+}
+.results-question,
+.results-question strong,
+.results-explanation {
+  color: #000000 !important;
+}
+[data-testid="stAlert"] p,
+[data-testid="stCaptionContainer"] p {
+  color: #000000 !important;
+}
 .stButton > button {
   border-radius: 9px;
-  border: 1px solid #1d2b2e;
+  border: 1px solid var(--ink);
   font-weight: 700;
   padding: 0.65rem 1.05rem;
 }

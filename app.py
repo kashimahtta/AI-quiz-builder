@@ -20,7 +20,7 @@ class Question:
 
 
 st.set_page_config(
-    page_title="Quizloom | AI Quiz Builder",
+    page_title="mak_quiz | AI Quiz Builder",
     page_icon="✦",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -121,7 +121,7 @@ def initialize_state() -> None:
 
 def render_sidebar() -> str:
     with st.sidebar:
-        st.markdown("## ✦ Quizloom")
+        st.markdown("## ✦ mak_quiz")
         st.caption("A focused studio for turning ideas into practice.")
         view = st.radio("Workspace", ["Build", "Take quiz", "Results"], label_visibility="collapsed")
         st.divider()
@@ -157,7 +157,7 @@ Photosynthesis converts light energy into chemical energy. In the light-dependen
         st.download_button(
             "Download demo prompt",
             demo_prompt,
-            file_name="quizloom_demo_prompt.txt",
+            file_name="mak_quiz_demo_prompt.txt",
             mime="text/plain",
         )
     with st.form("quiz_builder"):
@@ -193,7 +193,7 @@ Photosynthesis converts light energy into chemical energy. In the light-dependen
         )
         for number, question in enumerate(questions, start=1):
             st.markdown(f'<div class="question-card"><div class="tag">Question {number:02d}</div><strong>{question.prompt}</strong><br><small>{question.source}</small></div>', unsafe_allow_html=True)
-        st.download_button("Download question set", quiz_json(questions), file_name="quizloom_questions.json", mime="application/json")
+        st.download_button("Download question set", quiz_json(questions), file_name="mak_quiz_questions.json", mime="application/json")
     else:
         st.info("Your generated quiz will appear here. Start with a topic or paste in notes.")
 
@@ -235,13 +235,13 @@ def render_results() -> None:
         selected = st.session_state.answers.get(str(number), "")
         is_correct = selected == question.answer
         icon = "✓" if is_correct else "×"
-        st.markdown(f"**{icon} {number:02d}  {question.prompt}**")
+        st.markdown(f'<div class="results-question"><strong>{icon} {number:02d}  {question.prompt}</strong></div>', unsafe_allow_html=True)
         if is_correct:
             st.success(f"Correct: {question.answer}")
         else:
             st.error(f"You chose: {selected}")
             st.info(f"Correct answer: {question.answer}")
-        st.caption(question.explanation)
+        st.markdown(f'<div class="results-explanation">{question.explanation}</div>', unsafe_allow_html=True)
 
 
 initialize_state()
