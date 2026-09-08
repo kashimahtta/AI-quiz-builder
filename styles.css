@@ -22,6 +22,11 @@ body,
   font-family: "Manrope", sans-serif;
   color: var(--ink) !important;
 }
+p,
+label,
+[data-testid="stCaptionContainer"] {
+  color: #000000 !important;
+}
 html,
 body,
 #root,
@@ -201,6 +206,9 @@ div[data-testid="stForm"] div[data-testid="stRadio"] label:has(input:checked) {
   background: var(--indigo);
   border-color: var(--indigo);
   color: #fff;
+}
+.stButton > button[kind="primary"] p {
+  color: #fff !important;
 }
 .stDownloadButton > button,
 .stButton > button[kind="secondary"] {
