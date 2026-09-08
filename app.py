@@ -64,6 +64,7 @@ html, body, [class*="css"] { font-family: 'Manrope', sans-serif; color: var(--in
 .question-card { background: var(--panel); color: #000000 !important; border: 1px solid var(--line); border-left: 4px solid var(--mint-strong); padding: 1.1rem 1.2rem; border-radius: 0 12px 12px 0; margin: .75rem 0; }
 .question-card strong, .question-card small { color: #000000 !important; }
 .question-card .tag { font-family:'DM Mono', monospace; font-size:.7rem; color:var(--mint-strong); text-transform:uppercase; }
+.quiz-question, .quiz-question strong { color: #000000 !important; }
 .stButton > button { border-radius: 9px; border: 1px solid #1d2b2e; font-weight: 700; padding: .65rem 1.05rem; }
 .stButton > button[kind="primary"] { background: var(--coral); border-color: var(--coral); color: #fff; }
 div[data-testid="stForm"] { background: var(--panel); border: 1px solid var(--line); padding: 1.2rem; border-radius: 14px; }
@@ -224,7 +225,7 @@ def render_take_quiz() -> None:
     st.caption(f"{len(questions)} questions · choose one answer per question")
     with st.form("take_quiz"):
         for number, question in enumerate(questions, start=1):
-            st.markdown(f"**{number:02d}  {question.prompt}**")
+            st.markdown(f'<div class="quiz-question"><strong>{number:02d}  {question.prompt}</strong></div>', unsafe_allow_html=True)
             choice = st.radio("Answer", question.options, key=f"answer_{number}", label_visibility="collapsed")
             st.divider()
         submitted = st.form_submit_button("Check my answers  →", type="primary", use_container_width=True)
