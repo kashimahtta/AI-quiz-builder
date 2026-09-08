@@ -61,7 +61,8 @@ html, body, [class*="css"] { font-family: 'Manrope', sans-serif; color: var(--in
 .metric { border: 1px solid var(--line); background: rgba(255,253,248,.76); padding: .72rem 1rem; min-width: 120px; border-radius: 12px; }
 .metric strong { display:block; font-size: 1.25rem; }
 .metric small { color: var(--muted); }
-.question-card { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--mint-strong); padding: 1.1rem 1.2rem; border-radius: 0 12px 12px 0; margin: .75rem 0; }
+.question-card { background: var(--panel); color: #182329 !important; border: 1px solid var(--line); border-left: 4px solid var(--mint-strong); padding: 1.1rem 1.2rem; border-radius: 0 12px 12px 0; margin: .75rem 0; }
+.question-card strong, .question-card small { color: #182329 !important; }
 .question-card .tag { font-family:'DM Mono', monospace; font-size:.7rem; color:var(--mint-strong); text-transform:uppercase; }
 .stButton > button { border-radius: 9px; border: 1px solid #1d2b2e; font-weight: 700; padding: .65rem 1.05rem; }
 .stButton > button[kind="primary"] { background: var(--coral); border-color: var(--coral); color: #fff; }
