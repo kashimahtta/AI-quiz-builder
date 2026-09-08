@@ -4,6 +4,7 @@ import json
 import random
 import re
 from dataclasses import asdict, dataclass
+from pathlib import Path
 from typing import Any
 
 import streamlit as st
@@ -26,54 +27,12 @@ st.set_page_config(
 )
 
 
-# A warm, editorial visual system keeps the builder readable while giving it a
-# distinct identity from a default Streamlit dashboard.
-st.markdown(
-    """
-<style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
+def load_styles() -> None:
+    styles_path = Path(__file__).with_name("styles.css")
+    st.markdown(f"<style>{styles_path.read_text(encoding='utf-8')}</style>", unsafe_allow_html=True)
 
-:root {
-  --ink: #182329;
-  --muted: #66747a;
-  --paper: #f7f5ef;
-  --panel: #fffdf8;
-  --line: #dfe4dd;
-  --mint: #b9e8d4;
-  --mint-strong: #267a5a;
-  --coral: #ff8066;
-  --yellow: #f3d56b;
-}
 
-html, body, [class*="css"] { font-family: 'Manrope', sans-serif; color: var(--ink); }
-.stApp { background: radial-gradient(circle at 15% 0%, #fffdf1 0, transparent 34%), var(--paper); }
-.block-container { max-width: 1180px; padding-top: 2.2rem; padding-bottom: 4rem; }
-[data-testid="stSidebar"] { background: #1d2b2e; }
-[data-testid="stSidebar"] * { color: #edf7f0 !important; }
-[data-testid="stSidebar"] .stRadio label { padding: .38rem .1rem; }
-
-.eyebrow { font-family: 'DM Mono', monospace; color: var(--mint-strong); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; margin-bottom: .55rem; }
-.hero-title { font-size: clamp(2.25rem, 5vw, 4.5rem); line-height: .98; letter-spacing: -.065em; font-weight: 800; max-width: 720px; margin: 0; }
-.hero-title span { color: var(--coral); }
-.hero-copy { color: var(--muted); max-width: 620px; font-size: 1.03rem; margin-top: 1rem; }
-.section-label { font-family: 'DM Mono', monospace; font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin: 1.8rem 0 .65rem; }
-.metric-strip { display: flex; gap: .65rem; flex-wrap: wrap; margin: 1.5rem 0 .4rem; }
-.metric { border: 1px solid var(--line); background: rgba(255,253,248,.76); padding: .72rem 1rem; min-width: 120px; border-radius: 12px; }
-.metric strong { display:block; font-size: 1.25rem; }
-.metric small { color: var(--muted); }
-.question-card { background: var(--panel); color: #000000 !important; border: 1px solid var(--line); border-left: 4px solid var(--mint-strong); padding: 1.1rem 1.2rem; border-radius: 0 12px 12px 0; margin: .75rem 0; }
-.question-card strong, .question-card small { color: #000000 !important; }
-.question-card .tag { font-family:'DM Mono', monospace; font-size:.7rem; color:var(--mint-strong); text-transform:uppercase; }
-.quiz-question, .quiz-question strong { color: #000000 !important; }
-.stButton > button { border-radius: 9px; border: 1px solid #1d2b2e; font-weight: 700; padding: .65rem 1.05rem; }
-.stButton > button[kind="primary"] { background: var(--coral); border-color: var(--coral); color: #fff; }
-div[data-testid="stForm"] { background: var(--panel); border: 1px solid var(--line); padding: 1.2rem; border-radius: 14px; }
-[data-testid="stMetric"] { background: var(--panel); border: 1px solid var(--line); padding: .8rem; border-radius: 12px; }
-code { font-family: 'DM Mono', monospace; }
-</style>
-""",
-    unsafe_allow_html=True,
-)
+load_styles()
 
 
 def clean_notes(notes: str) -> list[str]:
@@ -85,16 +44,40 @@ def topic_words(topic: str) -> list[str]:
     return list(dict.fromkeys(words)) or ["the subject"]
 
 
+def compact_fact(text: str, limit: int = 240) -> str:
+    normalized = " ".join(text.split())
+    sentences = re.split(r"(?<=[.!?])\s+", normalized)
+    summary = " ".join(sentences[:2]).strip()
+    if len(summary) <= limit:
+        return summary
+    return f"{summary[: limit - 3].rsplit(' ', 1)[0]}..."
+
+
+def topic_facts(topic: str) -> list[str]:
+    if "photosynth" in topic.lower():
+        return [
+            "Photosynthesis converts light energy into chemical energy stored in sugars.",
+            "The light-dependent reactions split water and release oxygen as a byproduct.",
+            "The Calvin cycle uses carbon dioxide, ATP, and NADPH to help form sugars.",
+            "Chlorophyll absorbs mostly red and blue light and reflects green light.",
+            "Cyanobacteria contributed oxygen to Earth's atmosphere through photosynthesis.",
+            "Photosynthetic organisms use carbon dioxide as a carbon source for biomass.",
+        ]
+    return []
+
+
 def build_question(topic: str, difficulty: str, index: int, notes: list[str], rng: random.Random) -> Question:
-    focus = notes[index % len(notes)] if notes else f"a core idea in {topic}"
+    focus = compact_fact(notes[index % len(notes)]) if notes else f"A core idea in {topic}."
     words = topic_words(topic)
     anchor = words[index % len(words)].capitalize()
-    distractors = [
-        f"An unrelated detail about {topic}",
-        f"A common misconception about {topic}",
-        f"A later consequence rather than the main idea",
-        f"A definition from a different field",
+    fact_pool = [compact_fact(note) for note in notes if compact_fact(note) != focus]
+    fact_pool.extend(fact for fact in topic_facts(topic) if fact != focus)
+    fallback_facts = [
+        f"This idea describes a different process in {topic}.",
+        f"This idea explains a later result of {topic}.",
+        f"This statement belongs to a different area of science.",
     ]
+    distractors = list(dict.fromkeys(fact_pool + fallback_facts))[:3]
     templates: list[tuple[str, str, str]] = [
         (
             f"Which statement best captures the key idea behind {anchor} in {topic}?",
@@ -113,7 +96,7 @@ def build_question(topic: str, difficulty: str, index: int, notes: list[str], rn
         ),
     ]
     prompt, correct, explanation = templates[index % len(templates)]
-    options = [correct] + distractors[:3]
+    options = [correct] + distractors
     rng.shuffle(options)
     return Question(prompt, options, correct, explanation, "Generated from your topic and study notes")
 

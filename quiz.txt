@@ -1,0 +1,70 @@
+QUIZLOOM DEMO QUIZ
+Topic: Photosynthesis
+
+Use this text document as a sample question set for viewers.
+
+QUESTION 1
+Which statement best describes the main purpose of photosynthesis?
+
+A. It converts light energy into chemical energy stored in sugars.
+B. It converts oxygen into nitrogen for the atmosphere.
+C. It breaks down sugars to release energy for cells.
+D. It converts carbon dioxide directly into oxygen without using energy.
+
+Answer: A
+Explanation: Photosynthesis captures light energy and stores it as chemical energy in organic molecules such as sugars.
+
+QUESTION 2
+What is released when water is split during the light-dependent reactions?
+
+A. Carbon dioxide
+B. Oxygen
+C. Glucose
+D. Nitrogen
+
+Answer: B
+Explanation: Water is split during the light-dependent reactions, and oxygen is released as a byproduct.
+
+QUESTION 3
+What is the main role of the Calvin cycle?
+
+A. To absorb green light using chlorophyll
+B. To split water and release oxygen
+C. To use carbon dioxide, ATP, and NADPH to help form sugars
+D. To transport oxygen through the plant stem
+
+Answer: C
+Explanation: The Calvin cycle uses carbon dioxide and energy carriers made in the light-dependent reactions to build carbohydrates.
+
+QUESTION 4
+Why do most plants appear green?
+
+A. Chlorophyll reflects green light more than it absorbs it.
+B. Plants produce green oxygen during respiration.
+C. Green light is converted directly into glucose.
+D. The Calvin cycle creates a green pigment in the roots.
+
+Answer: A
+Explanation: Chlorophyll absorbs mostly red and blue light and reflects more green light, which is why leaves appear green.
+
+QUESTION 5
+Which organisms can perform photosynthesis?
+
+A. Only flowering plants
+B. Plants, algae, and cyanobacteria
+C. Only animals that eat plants
+D. Only fungi and bacteria that cause disease
+
+Answer: B
+Explanation: Photosynthesis is performed by plants, algae, cyanobacteria, and some other photosynthetic organisms.
+
+QUESTION 6
+Why were cyanobacteria important in Earth's history?
+
+A. They removed all carbon dioxide from the oceans.
+B. They produced oxygen that contributed to the oxygenation of Earth's atmosphere.
+C. They stopped all forms of cellular respiration.
+D. They converted sunlight into nitrogen gas.
+
+Answer: B
+Explanation: Oxygen-producing cyanobacteria helped increase atmospheric oxygen, making more complex life possible.

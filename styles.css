@@ -1,0 +1,141 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap");
+
+:root {
+  --ink: #182329;
+  --muted: #66747a;
+  --paper: #f7f5ef;
+  --panel: #fffdf8;
+  --line: #dfe4dd;
+  --mint: #b9e8d4;
+  --mint-strong: #267a5a;
+  --coral: #ff8066;
+  --yellow: #f3d56b;
+}
+
+html,
+body,
+[class*="css"] {
+  font-family: "Manrope", sans-serif;
+  color: var(--ink);
+}
+.stApp {
+  background:
+    radial-gradient(circle at 15% 0%, #fffdf1 0, transparent 34%), var(--paper);
+}
+.block-container {
+  max-width: 1180px;
+  padding-top: 2.2rem;
+  padding-bottom: 4rem;
+}
+[data-testid="stSidebar"] {
+  background: #1d2b2e;
+}
+[data-testid="stSidebar"] * {
+  color: #edf7f0 !important;
+}
+[data-testid="stSidebar"] .stRadio label {
+  padding: 0.38rem 0.1rem;
+}
+
+.eyebrow {
+  font-family: "DM Mono", monospace;
+  color: var(--mint-strong);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.55rem;
+}
+.hero-title {
+  font-size: clamp(2.25rem, 5vw, 4.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.065em;
+  font-weight: 800;
+  max-width: 720px;
+  margin: 0;
+}
+.hero-title span {
+  color: var(--coral);
+}
+.hero-copy {
+  color: var(--muted);
+  max-width: 620px;
+  font-size: 1.03rem;
+  margin-top: 1rem;
+}
+.section-label {
+  font-family: "DM Mono", monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin: 1.8rem 0 0.65rem;
+}
+.metric-strip {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  margin: 1.5rem 0 0.4rem;
+}
+.metric {
+  border: 1px solid var(--line);
+  background: rgba(255, 253, 248, 0.76);
+  padding: 0.72rem 1rem;
+  min-width: 120px;
+  border-radius: 12px;
+}
+.metric strong {
+  display: block;
+  font-size: 1.25rem;
+}
+.metric small {
+  color: var(--muted);
+}
+.question-card {
+  background: var(--panel);
+  color: #000000 !important;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--mint-strong);
+  padding: 1.1rem 1.2rem;
+  border-radius: 0 12px 12px 0;
+  margin: 0.75rem 0;
+}
+.question-card strong,
+.question-card small {
+  color: #000000 !important;
+}
+.question-card .tag {
+  font-family: "DM Mono", monospace;
+  font-size: 0.7rem;
+  color: var(--mint-strong);
+  text-transform: uppercase;
+}
+.quiz-question,
+.quiz-question strong {
+  color: #000000 !important;
+}
+.stButton > button {
+  border-radius: 9px;
+  border: 1px solid #1d2b2e;
+  font-weight: 700;
+  padding: 0.65rem 1.05rem;
+}
+.stButton > button[kind="primary"] {
+  background: var(--coral);
+  border-color: var(--coral);
+  color: #fff;
+}
+div[data-testid="stForm"] {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 1.2rem;
+  border-radius: 14px;
+}
+[data-testid="stMetric"] {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 0.8rem;
+  border-radius: 12px;
+}
+code {
+  font-family: "DM Mono", monospace;
+}
