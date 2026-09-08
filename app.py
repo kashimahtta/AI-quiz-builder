@@ -206,6 +206,7 @@ def render_take_quiz() -> None:
         st.warning("Build a quiz first, then come back here to take it.")
         return
     st.caption(f"{len(questions)} questions · choose one answer per question")
+    st.progress(0, text=f"0 / {len(questions)} answered")
     with st.form("take_quiz"):
         for number, question in enumerate(questions, start=1):
             st.markdown(f'<div class="quiz-question"><strong>{number:02d}  {question.prompt}</strong></div>', unsafe_allow_html=True)
@@ -231,16 +232,17 @@ def render_results() -> None:
     score = sum(st.session_state.answers.get(str(i)) == question.answer for i, question in enumerate(questions, start=1))
     percentage = round(score / len(questions) * 100)
     st.metric("Score", f"{score} / {len(questions)}", f"{percentage}%")
+    st.progress(percentage / 100, text=f"{percentage}% correct")
     for number, question in enumerate(questions, start=1):
         selected = st.session_state.answers.get(str(number), "")
         is_correct = selected == question.answer
         icon = "✓" if is_correct else "×"
         st.markdown(f'<div class="results-question"><strong>{icon} {number:02d}  {question.prompt}</strong></div>', unsafe_allow_html=True)
         if is_correct:
-            st.success(f"Correct: {question.answer}")
+            st.markdown(f'<div class="answer-correct"><strong>Correct:</strong> {question.answer}</div>', unsafe_allow_html=True)
         else:
-            st.error(f"You chose: {selected}")
-            st.info(f"Correct answer: {question.answer}")
+            st.markdown(f'<div class="answer-incorrect"><strong>You chose:</strong> {selected}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="answer-correct-detail"><strong>Correct answer:</strong> {question.answer}</div>', unsafe_allow_html=True)
         st.markdown(f'<div class="results-explanation">{question.explanation}</div>', unsafe_allow_html=True)
 
 

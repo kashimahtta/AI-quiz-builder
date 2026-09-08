@@ -1,15 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap");
 
 :root {
-  --ink: #182329;
-  --muted: #66747a;
-  --paper: #f7f5ef;
-  --panel: #fffdf8;
-  --line: #dfe4dd;
-  --mint: #b9e8d4;
-  --mint-strong: #267a5a;
-  --coral: #ff8066;
-  --yellow: #f3d56b;
+  --ink: #0f172a;
+  --muted: #475569;
+  --paper: #f7f8fc;
+  --panel: #ffffff;
+  --line: #cbd5e1;
+  --indigo: #6366f1;
+  --indigo-soft: #eef2ff;
+  --sky-soft: #f0f9ff;
+  --correct: #34d399;
+  --correct-soft: #ecfdf5;
+  --incorrect: #fb7185;
+  --incorrect-soft: #fff1f2;
+  --sky: #38bdf8;
 }
 
 html,
@@ -18,9 +22,20 @@ body,
   font-family: "Manrope", sans-serif;
   color: var(--ink) !important;
 }
+html,
+body,
+#root,
+.stApp,
+[data-testid="stAppViewContainer"],
+[data-testid="stHeader"],
+[data-testid="stToolbar"],
+[data-testid="stSidebar"],
+[data-testid="stSidebarContent"] {
+  background-color: var(--paper) !important;
+}
 .stApp {
   background:
-    radial-gradient(circle at 15% 0%, #fffdf1 0, transparent 34%), var(--paper);
+    radial-gradient(circle at 15% 0%, #ffffff 0, transparent 34%), var(--paper);
 }
 .block-container {
   max-width: 1180px;
@@ -28,7 +43,7 @@ body,
   padding-bottom: 4rem;
 }
 [data-testid="stSidebar"] {
-  background: #eef7f1;
+  background-color: #ffffff !important;
 }
 [data-testid="stSidebar"] * {
   color: var(--ink) !important;
@@ -39,7 +54,7 @@ body,
 
 .eyebrow {
   font-family: "DM Mono", monospace;
-  color: var(--mint-strong);
+  color: var(--indigo);
   font-size: 0.72rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -54,7 +69,7 @@ body,
   margin: 0;
 }
 .hero-title span {
-  color: var(--coral);
+  color: var(--indigo);
 }
 .hero-copy {
   color: var(--muted);
@@ -78,7 +93,7 @@ body,
 }
 .metric {
   border: 1px solid var(--line);
-  background: rgba(255, 253, 248, 0.76);
+  background: var(--panel);
   padding: 0.72rem 1rem;
   min-width: 120px;
   border-radius: 12px;
@@ -94,7 +109,7 @@ body,
   background: var(--panel);
   color: #000000 !important;
   border: 1px solid var(--line);
-  border-left: 4px solid var(--mint-strong);
+  border-left: 4px solid var(--indigo);
   padding: 1.1rem 1.2rem;
   border-radius: 0 12px 12px 0;
   margin: 0.75rem 0;
@@ -106,7 +121,7 @@ body,
 .question-card .tag {
   font-family: "DM Mono", monospace;
   font-size: 0.7rem;
-  color: var(--mint-strong);
+  color: var(--indigo);
   text-transform: uppercase;
 }
 .quiz-question,
@@ -118,10 +133,57 @@ div[data-testid="stForm"] div[data-testid="stRadio"] label p,
 div[data-testid="stForm"] div[data-testid="stRadio"] label span {
   color: #000000 !important;
 }
+div[data-testid="stForm"] div[data-testid="stRadio"] label {
+  background: #ffffff !important;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0.55rem 0.75rem;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease;
+}
+div[data-testid="stForm"] div[data-testid="stRadio"] label:hover {
+  background: var(--sky-soft) !important;
+}
+div[data-testid="stForm"] div[data-testid="stRadio"] label:has(input:checked) {
+  background: var(--indigo-soft) !important;
+  border-color: var(--indigo) !important;
+}
 .results-question,
 .results-question strong,
 .results-explanation {
   color: #000000 !important;
+}
+.answer-correct,
+.answer-incorrect,
+.answer-correct-detail,
+.answer-incorrect-detail {
+  padding: 0.75rem 0.9rem;
+  border-radius: 8px;
+  margin: 0.45rem 0;
+  color: var(--ink) !important;
+}
+.answer-correct {
+  background: var(--correct-soft);
+  border-left: 4px solid var(--correct);
+}
+.answer-incorrect {
+  background: var(--incorrect-soft);
+  border-left: 4px solid var(--incorrect);
+}
+.answer-correct-detail {
+  background: var(--correct-soft);
+  border-left: 4px solid var(--correct);
+}
+.answer-incorrect-detail {
+  background: var(--incorrect-soft);
+  border-left: 4px solid var(--incorrect);
+}
+[data-testid="stProgress"] > div > div {
+  background-color: var(--indigo) !important;
+}
+[data-testid="stProgress"] > div {
+  background-color: var(--indigo-soft) !important;
 }
 [data-testid="stAlert"] p,
 [data-testid="stCaptionContainer"] p {
@@ -129,14 +191,28 @@ div[data-testid="stForm"] div[data-testid="stRadio"] label span {
 }
 .stButton > button {
   border-radius: 9px;
-  border: 1px solid var(--ink);
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--ink);
   font-weight: 700;
   padding: 0.65rem 1.05rem;
 }
 .stButton > button[kind="primary"] {
-  background: var(--coral);
-  border-color: var(--coral);
+  background: var(--indigo);
+  border-color: var(--indigo);
   color: #fff;
+}
+.stDownloadButton > button,
+.stButton > button[kind="secondary"] {
+  background: #ffffff;
+  border-color: var(--line);
+  color: var(--ink);
+}
+.stTextInput input,
+.stTextArea textarea,
+.stSelectSlider [role="slider"] {
+  background: #f1f5f9 !important;
+  color: var(--ink) !important;
 }
 div[data-testid="stForm"] {
   background: var(--panel);
