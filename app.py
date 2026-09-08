@@ -157,6 +157,24 @@ def render_build() -> None:
     render_header()
     questions: list[Question] = st.session_state.questions
     st.markdown('<div class="section-label">01 / Shape your quiz</div>', unsafe_allow_html=True)
+    demo_prompt = """Topic: Photosynthesis
+
+Study notes:
+Plants, algae, and cyanobacteria use light energy to produce chemical energy.
+The light-dependent reactions split water and release oxygen.
+The Calvin cycle uses carbon dioxide, ATP, and NADPH to form sugars.
+
+Expected demo answer:
+Photosynthesis converts light energy into chemical energy. In the light-dependent reactions, water is split and oxygen is released. The Calvin cycle then uses carbon dioxide, ATP, and NADPH to help form sugars."""
+    with st.expander("See a demo prompt and answer"):
+        st.caption("This is the kind of text document viewers can paste into the builder.")
+        st.code(demo_prompt, language="text")
+        st.download_button(
+            "Download demo prompt",
+            demo_prompt,
+            file_name="quizloom_demo_prompt.txt",
+            mime="text/plain",
+        )
     with st.form("quiz_builder"):
         topic = st.text_input("What are you learning?", placeholder="e.g. Photosynthesis, World War II, Python decorators")
         notes = st.text_area(
